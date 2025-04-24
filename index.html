@@ -4,51 +4,71 @@
   <meta charset="UTF-8">
   <title>喘息服務小遊戲</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap');
+
     body {
-      font-family: 'Arial', sans-serif;
-      background: #f4f6f8;
+      font-family: 'Noto Sans TC', sans-serif;
+      background: linear-gradient(to top left, #ffeef0, #e0f7fa);
       margin: 0;
       padding: 2rem;
-      color: #333;
+      color: #444;
+      background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzA1YjM0ZDM4N2IwZmE4NzdlZTk4Zjc2MTJhOTkxM2Q4ZTRkN2EwZCZjdD1n/3oEduQAsYcJKQH2XsI/giphy.gif');
+      background-size: 150px;
+      background-repeat: no-repeat;
+      background-position: bottom right;
     }
     .game-container {
       max-width: 600px;
       margin: auto;
-      background: white;
+      background: #fffdfb;
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
     }
     h2 {
-      color: #0077aa;
+      color: #ff69b4;
+      text-align: center;
     }
-    .question {
-      margin-bottom: 1rem;
+    .question h3 {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    .question p {
+      font-size: 1.1rem;
     }
     .options button {
       display: block;
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.7rem;
       margin: 0.5rem 0;
       border: none;
-      background-color: #e0f7fa;
+      background-color: #ffe0f0;
       cursor: pointer;
-      border-radius: 6px;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
     }
     .options button:hover {
-      background-color: #b2ebf2;
+      background-color: #ffccdd;
     }
     .result {
       text-align: center;
+    }
+    .cute-gif {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .cute-gif img {
+      width: 120px;
     }
   </style>
 </head>
 <body>
   <div class="game-container">
-    <h2>認識喘息服務</h2>
-    <div id="game">
-      <!-- Game content will be injected here -->
-    </div>
+    <h2>🐣 認識喘息服務 🐣</h2>
+    <div id="game"></div>
   </div>
 
   <script>
@@ -88,7 +108,7 @@
       const game = document.getElementById("game");
       game.innerHTML = `
         <div class="question">
-          <h3>第 ${current + 1} 關</h3>
+          <h3>第 ${current + 1} 關 ✨</h3>
           <p>${q.text}</p>
         </div>
         <div class="options">
@@ -112,15 +132,24 @@
     function showResult() {
       const game = document.getElementById("game");
       let comment = "";
-      if (score === 5) comment = "你對喘息服務瞭若指掌，請多多分享給需要的人！";
-      else if (score >= 3) comment = "你對喘息服務已有基本了解，繼續加油！";
-      else comment = "歡迎重新挑戰，深入認識喘息服務的重要性。";
+      let gif = "";
+      if (score === 5) {
+        comment = "你對喘息服務瞭若指掌，請多多分享給需要的人！";
+        gif = "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif";
+      } else if (score >= 3) {
+        comment = "你對喘息服務已有基本了解，繼續加油！";
+        gif = "https://media.giphy.com/media/l3vR0K8CjXGNo7pKc/giphy.gif";
+      } else {
+        comment = "歡迎重新挑戰，深入認識喘息服務的重要性。";
+        gif = "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif";
+      }
 
       game.innerHTML = `
         <div class="result">
-          <h3>遊戲結束！</h3>
+          <h3>🎉 遊戲結束！ 🎉</h3>
           <p>你的總分是：${score} / 5</p>
           <p>${comment}</p>
+          <div class="cute-gif"><img src="${gif}" alt="result gif"></div>
         </div>
       `;
     }
